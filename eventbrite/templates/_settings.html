@@ -1,0 +1,23 @@
+{% import '_includes/forms' as forms %}
+
+<h2>Eventbrite API Credentials</h2>
+
+<p>Enter your API credentials here:</p>
+
+<div class="eventbrite-field-container">
+{{ forms.textField({
+	label: "API Key"|t,
+	id: 'apiKey',
+	name: 'apiKey',
+	value: settings.apiKey,
+	errors: settings.getErrors('apiKey')
+}) }}
+
+{{ forms.textField({
+	label: "Personal OAuth Token"|t,
+	id: 'oAuthToken',
+	name: 'oAuthToken',
+	value: settings.oAuthToken,
+	errors: settings.getErrors('oAuthToken')
+}) }}
+</div>
