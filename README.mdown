@@ -36,11 +36,13 @@ Returns a list of event objects owned by the user for the given ID.
 
 Returns a list of event objects.
 
+```
 {% set events = craft.eventbrite.users.events({'id': 555555555555, 'name_filter': 'test', 'expand': 'venue'}) %}
 {% for event in events %}
 	Event: {{event.name.text}}
 	Venue: {{event.venue.name}}
 {% endfor %}
+```
 
 ### Venues
 
@@ -81,16 +83,18 @@ Returns a list of event objects owned by the user represented by the OAuth Token
 
 Returns a list of event objects owned by the user represented by the OAuth Token provided in the settings.
 
+```
 {% set events = craft.eventbrite.self.events({'id': 555555555555, 'name_filter': 'test'}) %}
 {% for event in events %}
 	Event:{{event.name.text}}
 {% endfor %}
+```
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Koty Yell
+Copyright (c) 2015 STAPLEGUN
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
