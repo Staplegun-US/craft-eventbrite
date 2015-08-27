@@ -33,7 +33,6 @@ class EventbritePlugin extends BasePlugin
 	protected function defineSettings()
 	{
 		return array(
-			'apiKey' => array(AttributeType::String, 'label' => 'Eventbrite API Key'),
 			'oAuthToken' => array(AttributeType::String, 'label' => 'Eventbrite OAuth Token (Personal)')
 		);
 	}
