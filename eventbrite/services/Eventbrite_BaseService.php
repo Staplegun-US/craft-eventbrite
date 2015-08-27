@@ -4,25 +4,34 @@ namespace Craft;
 class Eventbrite_BaseService extends BaseApplicationComponent
 {
 	protected $oAuthToken;
+	public $cacheDuration;
 
 	public function init()
 	{
 		$settings = craft()->plugins->getPlugin('eventbrite')->getSettings();
 
 		$this->oAuthToken = $settings->oAuthToken;
+		$this->cacheDuration = $settings->cacheDuration;
 	}
 
 	protected function _makeRequest($url)
 	{
 		try {
-			$client = new \Guzzle\Http\Client();
-			$request = $client->get($url);
-			$request->addHeader('Authorization', 'Bearer ' . $this->oAuthToken);
-			$response = $request->send();
-			if (!$response->issuccessful()){
-				return;
+			$cached = craft()->cache->get($url);
+			if ($cached) {
+				return $cached;
+			} else {
+				$client = new \Guzzle\Http\Client();
+				$request = $client->get($url);
+				$request->addHeader('Authorization', 'Bearer ' . $this->oAuthToken);
+				$response = $request->send();
+				if (!$response->issuccessful()){
+					return;
+				}
+				$output = $response->json();
+				craft()->cache->set($url, $output, $this->cacheDuration);
+				return $output;
 			}
-			return $response->json();
 		} catch(\Exception $e) {
 			throw $e;
 		}

@@ -33,7 +33,8 @@ class EventbritePlugin extends BasePlugin
 	protected function defineSettings()
 	{
 		return array(
-			'oAuthToken' => array(AttributeType::String, 'label' => 'Eventbrite OAuth Token (Personal)')
+			'oAuthToken' => array(AttributeType::String, 'label' => 'Eventbrite OAuth Token (Personal)'),
+			'cacheDuration' => array(AttributeType::Number, 'label' => 'Cache Duration (seconds)', 'default' => 3600)
 		);
 	}
 }

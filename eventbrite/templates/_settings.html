@@ -10,5 +10,12 @@
 	value: settings.oAuthToken,
 	errors: settings.getErrors('oAuthToken')
 }) }}
+{{ forms.textField({
+	label: "Cache Duration"|t,
+	id: 'cacheDuration',
+	name: 'cacheDuration',
+	value: settings.cacheDuration,
+	errors: settings.getErrors('cacheDuration')
+}) }}
 
 </div>
