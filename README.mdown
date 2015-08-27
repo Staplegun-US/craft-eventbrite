@@ -1,6 +1,6 @@
 # Craft Eventbrite Plugin
 
-Provides a simple API wrapper for Eventbrite by exposing Eventbrite's API endpoints as craft template variables.
+Provides a simple API wrapper for Eventbrite by exposing Eventbrite's v3 API endpoints as craft template variables.
 
 ## Installation
 1. Move the `eventbrite` folder into your `craft/plugins` directory.
@@ -8,7 +8,7 @@ Provides a simple API wrapper for Eventbrite by exposing Eventbrite's API endpoi
 3. Enter your Personal OAuth token from Eventbrite.
 
 ## Usage
-Note: This plugin currently only supports part of the [Users API endpoint](https://www.eventbrite.com/developer/v3/endpoints/users/). Pull requests and feature suggestions are welcomed.
+Note: This plugin currently only supports select parts of the Eventbrite API. Pull requests and feature suggestions are welcomed.
 
 ### Users
 
@@ -36,9 +36,10 @@ Returns a list of event objects owned by the user for the given ID.
 
 Returns a list of event objects.
 
-{% set events = craft.eventbrite.users.events({'id': 555555555555, 'name_filter': 'test'}) %}
+{% set events = craft.eventbrite.users.events({'id': 555555555555, 'name_filter': 'test', 'expand': 'venue'}) %}
 {% for event in events %}
-	Event:{{event.name.text}}
+	Event: {{event.name.text}}
+	Venue: {{event.venue.name}}
 {% endfor %}
 
 ### Self
@@ -73,6 +74,17 @@ Returns a list of event objects owned by the user represented by the OAuth Token
 {% for event in events %}
 	Event:{{event.name.text}}
 {% endfor %}
+
+### Venues
+
+#### craft.eventbrite.venues.venues
+
+Returns a venue object for the given ID.
+
+```
+{% set venue = craft.eventbrite.venues.venues({'id': 5555555}) %}
+{{venue.name}}
+```
 
 ## License
 
