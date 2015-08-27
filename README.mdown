@@ -3,9 +3,9 @@
 Provides a simple API wrapper for Eventbrite by exposing Eventbrite's v3 API endpoints as craft template variables.
 
 ## Installation
-1. Move the `eventbrite` folder into your `craft/plugins` directory.
+1. Move the `eventbrite` folder into your `craft/plugins` directory
 2. Install the plugin in the Craft Control Panel
-3. Enter your Personal OAuth token from Eventbrite.
+3. Enter your Personal OAuth token from Eventbrite in the plugin's settings
 
 ## Usage
 Note: This plugin currently only supports select parts of the Eventbrite API. Pull requests and feature suggestions are welcomed.
