@@ -42,6 +42,17 @@ Returns a list of event objects.
 	Venue: {{event.venue.name}}
 {% endfor %}
 
+### Venues
+
+#### [craft.eventbrite.venues.venues](https://www.eventbrite.com/developer/v3/endpoints/venues/#ebapi-get-venues-id)
+
+Returns a venue object for the given ID.
+
+```
+{% set venue = craft.eventbrite.venues.venues({'id': 5555555}) %}
+{{venue.name}}
+```
+
 ### Self
 
 Also included is a template variable, `eventbrite.self`, which duplicates the functionality of the `eventbrite.users` variable above, but without the necessity of passing in your ID with every use.
@@ -74,17 +85,6 @@ Returns a list of event objects owned by the user represented by the OAuth Token
 {% for event in events %}
 	Event:{{event.name.text}}
 {% endfor %}
-
-### Venues
-
-#### craft.eventbrite.venues.venues
-
-Returns a venue object for the given ID.
-
-```
-{% set venue = craft.eventbrite.venues.venues({'id': 5555555}) %}
-{{venue.name}}
-```
 
 ## License
 
