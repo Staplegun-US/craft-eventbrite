@@ -1,0 +1,99 @@
+# Craft Eventbrite Plugin
+
+Provides a simple API wrapper for Eventbrite by exposing Eventbrite's API endpoints as craft tempalte variables.
+
+## Installation
+1. Move the `eventbrite` folder into your `craft/plugins` directory.
+2. Install the plugin in the Craft Control Panel
+3. Enter your Personal OAuth token from Eventbrite.
+
+## Usage
+Note: This plugin currently only supports part of the (Users API endpoint)[https://www.eventbrite.com/developer/v3/endpoints/users/]. 
+
+### Users
+
+#### (craft.eventbrite.users.users)[https://www.eventbrite.com/developer/v3/endpoints/users/#ebapi-get-users-id]
+
+Returns the user object for the given ID.
+
+```
+{% set user = craft.eventbrite.users.users({'id': 555555555555}) %}
+{{user.first_name}}
+```
+
+#### (craft.eventbrite.users.ownedEvents)[https://www.eventbrite.com/developer/v3/endpoints/users/#ebapi-get-users-id-owned-events]
+
+Returns a list of event objects owned by the user for the given ID.
+
+```
+{% set ownedEvents = craft.eventbrite.users.ownedEvents({'id': 555555555555, 'status': 'all'}) %}
+{% for ownedEvent in ownedEvents %}
+	{{ownedEvent.name.text}}
+{% endfor %}
+```
+
+#### (craft.eventbrite.users.events)[https://www.eventbrite.com/developer/v3/endpoints/users/#ebapi-get-users-id-events]
+
+Returns a list of event objects.
+
+{% set events = craft.eventbrite.users.events({'id': 555555555555, 'name_filter': 'test'}) %}
+{% for event in events %}
+	Event:{{event.name.text}}
+{% endfor %}
+
+### Self
+
+Also included is a template variable, `eventbrite.self`, which duplicates the functionality of the `eventbrite.users` variable above, but without the necessity of passing in your ID with every use.
+
+#### craft.eventbrite.self.users
+
+Returns the user object for OAuth Token provided in the settings.
+
+```
+{% set user = craft.eventbrite.self.users() %}
+{{user.first_name}}
+```
+
+#### craft.eventbrite.self.ownedEvents
+
+Returns a list of event objects owned by the user represented by the OAuth Token provided in the settings.
+
+```
+{% set ownedEvents = craft.eventbrite.self.ownedEvents({'status': 'all'}) %}
+{% for ownedEvent in ownedEvents %}
+	{{ownedEvent.name.text}}
+{% endfor %}
+```
+
+#### craft.eventbrite.self.events
+
+Returns a list of event objects owned by the user represented by the OAuth Token provided in the settings.
+
+{% set events = craft.eventbrite.self.events({'id': 555555555555, 'name_filter': 'test'}) %}
+{% for event in events %}
+	Event:{{event.name.text}}
+{% endfor %}
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Koty Yell
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
