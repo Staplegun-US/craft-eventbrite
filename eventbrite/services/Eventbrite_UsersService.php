@@ -3,11 +3,6 @@ namespace Craft;
 
 class Eventbrite_UsersService extends Eventbrite_BaseService
 {
-	protected function _getIdFromOptions($options)
-	{
-		return $this->pop_from_array($options, 'id');
-	}
-
 	public function getUser($options = array())
 	{
 		$id = $this->_getIdFromOptions($options);

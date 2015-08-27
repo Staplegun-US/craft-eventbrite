@@ -3,14 +3,12 @@ namespace Craft;
 
 class Eventbrite_BaseService extends BaseApplicationComponent
 {
-	protected $apiKey;
 	protected $oAuthToken;
 
 	public function init()
 	{
 		$settings = craft()->plugins->getPlugin('eventbrite')->getSettings();
 
-		$this->apiKey = $settings->apiKey;
 		$this->oAuthToken = $settings->oAuthToken;
 	}
 
@@ -35,7 +33,12 @@ class Eventbrite_BaseService extends BaseApplicationComponent
 		return 'https://www.eventbriteapi.com/v3/' . $endpoint . '?';
 	}
 
-	public function pop_from_array($array, $key, $default = null)
+	protected function _getIdFromOptions(&$options)
+	{
+		return $this->pop_from_array($options, 'id');
+	}
+
+	public function pop_from_array(&$array, $key, $default = null)
 	{
 		if (array_key_exists($key, $array)) {
 			$val = $array[$key];
