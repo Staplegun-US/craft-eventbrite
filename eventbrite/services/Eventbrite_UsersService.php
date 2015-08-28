@@ -3,30 +3,24 @@ namespace Craft;
 
 class Eventbrite_UsersService extends Eventbrite_BaseService
 {
-	public function getUser($options = array())
-	{
-		$id = $this->_getIdFromOptions($options);
-		$query = http_build_query($options);
-		$url = $this->_buildEventbriteUrl('users/' . $id . '/') . $query;
-		$response = $this->_makeRequest($url);
-		return $response;
-	}
+  public function getUser($options = array())
+  {
+    $id       = $this->_getIdFromOptions($options);
+    $response = $this->_get('users/' . $id . '/', $options);
+    return $response;
+  }
 
-	public function getOwnedEvents($options = array())
-	{
-		$id = $this->_getIdFromOptions($options);
-		$query = http_build_query($options);
-		$url = $this->_buildEventbriteUrl('users/' . $id . '/owned_events/') . $query;
-		$response = $this->_makeRequest($url);
-		return $response['events'];
-	}
+  public function getOwnedEvents($options = array())
+  {
+    $id       = $this->_getIdFromOptions($options);
+    $response = $this->_get('users/' . $id . '/owned_events/', $options);
+    return $response['events'];
+  }
 
-	public function getEvents($options = array())
-	{
-		$id = $this->_getIdFromOptions($options);
-		$query = http_build_query($options);
-		$url = $this->_buildEventbriteUrl('users/' . $id . '/events/') . $query;
-		$response = $this->_makeRequest($url);
-		return $response['events'];
-	}
+  public function getEvents($options = array())
+  {
+    $id       = $this->_getIdFromOptions($options);
+    $response = $this->_get('users/' . $id . '/events/', $options);
+    return $response['events'];
+  }
 }

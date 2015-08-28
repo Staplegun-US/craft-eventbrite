@@ -47,6 +47,13 @@ class Eventbrite_BaseService extends BaseApplicationComponent
 		return $this->pop_from_array($options, 'id');
 	}
 
+  protected function _get($endpoint, $options){
+    $query    = http_build_query($options);
+    $url      = $this->_buildEventbriteUrl($endpoint) . $query;
+    $response = $this->_makeRequest($url);
+    return $response;
+  }
+
 	public function pop_from_array(&$array, $key, $default = null)
 	{
 		if (array_key_exists($key, $array)) {
